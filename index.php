@@ -13,35 +13,65 @@ include_once 'src/bootstrap.php';
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 </head>
 
-<body class="bg-grey-100 px-3 font-sans leading-normal tracking-normal">
-    <div x-data="lawSearch()" class="flex flex-col max-w-screen-md max-h-screen mx-auto p-4">
-        <div class="relative">
-            <input x-model="search"
-                class="w-full px-2 py-1 border focus:border-blue-300 ring-blue-300 focus:ring focus:outline-none"
-                type="text" placeholder="Search..." />
+<body class="bg-gray-100 px-3 font-sans leading-normal tracking-normal">
+    <div class=" mt-4  max-w-screen-md max-h-screen mx-auto p-4 text-center">
+        <h2 class="font-bold text-xl">Upload Document Metadata</h2>
+    </div>
+    <div class="p-5">
+<!-- date of delivery & Court -->
+<div class="p-4 bg-white border rounded-lg m-4">
+ 
+    <form method="post" class="bg-white container flex flex-col mx-auto space-y-12 ng-untouched ng-pristine ng-valid">
 
-            <button x-show="search.length > 0" @click="search = ''"
-                class="absolute right-0 top-0 w-6 h-full flex justify-center items-center focus:outline-none text-gray-700 focus:text-gray-900">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg">
+        <div class="grid grid-cols-3 gap-2 ">
+            <div class="mt-2">
+                <label for="names" class="text-sm">Case Number</label>
+                <input id="names" name="names" type="text" placeholder="Case Number" class="p-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full">
+            </div>
+            <div class="mt-2">
+                <label for="national_id" class="text-sm">Case Parties</label>
+                <input id="national_id" name="national_id" type="text" placeholder="Case Parties" class="p-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full">
+            </div>
+            <div class="mt-2">
+                <label for="kra_pin" class="text-sm">Date of Delivery</label>
+                <input id="kra_pin" name="kra_pin" type="text" placeholder="Date of Delivery" class="p-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full">
+            </div>
+            <div class="mt-2">
+                <label for="kra_pin" class="text-sm">Court</label>
+                <input id="kra_pin" name="kra_pin" type="text" placeholder="Court" class="p-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full">
+            </div>
+             
+            
+            <div class="col-span-full sm:col-span-3 mt-2">
+                <input type="submit" class="bg-blue-500 text-white text-sm font-medium px-6 py-2 rounded uppercase cursor-pointer" value="Upload Metadata">
+            </div>
+            <a href="javascript:history.back()">Go back</a>
+        </div>
+
+
+    </form>
+</div>
+    </div>
+    </div>
+
+    <!-- <div x-data="lawSearch()" class="flex flex-col max-w-screen-md max-h-screen mx-auto p-4">
+        <div class="relative">
+            <input x-model="search" class="w-full px-2 py-1 border focus:border-blue-300 ring-blue-300 focus:ring focus:outline-none" type="text" placeholder="Search..." />
+
+            <button x-show="search.length > 0" @click="search = ''" class="absolute right-0 top-0 w-6 h-full flex justify-center items-center focus:outline-none text-gray-700 focus:text-gray-900">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
                     </path>
                 </svg>
             </button>
-        </div>
+        </div> -->
 
-<?php
-foreach($data as $d){
-    echo $d->issuing_body . "<br>";
-}
 
-?>
-
-        <ul class="mt-4 overflow-auto">
-            <template x-for="law in filteredLaws()" :key="law">
-                <li x-html="highlightSearch(law)"></li>
-            </template>
-        </ul>
+    <ul class="mt-4 overflow-auto">
+        <template x-for="law in filteredLaws()" :key="law">
+            <li x-html="highlightSearch(law)"></li>
+        </template>
+    </ul>
     </div>
     <script>
         function lawSearch() {
@@ -53,7 +83,7 @@ foreach($data as $d){
                     "The Architects and Quantity Surveyors Act",
                     "The Engineers Registration Act",
                     "The Certified Public Secretaries of Kenya Act",
-                    "The Capital Markets Authority Act"                  
+                    "The Capital Markets Authority Act"
                 ],
 
                 search: '',
