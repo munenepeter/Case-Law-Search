@@ -8,8 +8,10 @@ class Database {
 
     public  function __construct() {
         try {
-            
-            $this->pdo =  new \PDO("mysql:host=localhost;dbname=test", 'root', '');
+            //For SQLITE
+             $this->pdo = new \PDO("sqlite:src/database/database.sqlite");
+           //For MySQL 
+           // $this->pdo =  new \PDO("mysql:host=localhost;dbname=test", 'root', '');
 
         } catch (\PDOException $e) {
             echo $e->getMessage();

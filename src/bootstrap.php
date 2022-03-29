@@ -7,4 +7,4 @@ include "database/Database.php";
 
 $DB = new Database();
 
-$data = $DB->query('select * from docs');
+$data = $DB->query('select * from cases');
