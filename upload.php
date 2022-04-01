@@ -44,7 +44,7 @@ include_once 'src/bootstrap.php';
                     <!-- <div class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="user_avatar_help">A profile picture is useful to confirm your are logged into your account</div> -->
                 </div>
 
-
+                <!-- https://codepen.io/smashingmag/pen/vYOJaMb?editors=1000 -->
                 <div class="col-span-full sm:col-span-3 mt-4">
                     <input type="submit" name="btn" class="bg-blue-500 text-white text-sm font-medium px-6 py-2 rounded capitalize cursor-pointer" value="Upload Metadata">
                     <br> <a class="ml-2 text-blue-600 hover:underline hover:text-blue-700" href="javascript:history.back()">Go back</a>
