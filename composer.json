@@ -1,0 +1,5 @@
+{
+    "require": {
+        "lukemadhanga/php-document-parser": "^0.1.5"
+    }
+}
