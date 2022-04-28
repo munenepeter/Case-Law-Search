@@ -4,17 +4,20 @@ include_once '../bootstrap.php';
 
 upload();
 
-$case_no  = validate($_POST['case_no']);
-$date_of_delivery = validate($_POST['date_of_delivery']);
-$court  = validate($_POST['court']);
-$case_parties  = validate($_POST['case_parties']);
+if(isset($_FILES["case_doc"]["name"]) && isset($_POST['case_no'])){
 
-$case_doc  = basename($_FILES["case_doc"]["name"]);
+    $case_no  = validate($_POST['case_no']);
+    $date_of_delivery = validate($_POST['date_of_delivery']);
+    $court  = validate($_POST['court']);
+    $case_parties  = validate($_POST['case_parties']);
+    $case_doc  = basename($_FILES["case_doc"]["name"]);
+    $created_at  = date('Y-m-d H:i:s', time());
+    $updated_at = date('Y-m-d H:i:s', time());
 
-$created_at  = date('Y-m-d H:i:s', time());;
-$updated_at = date('Y-m-d H:i:s', time());;
-
-
+}else{
+    echo "Nothing was submitted, Please try again";
+    exit;
+}
 
 try {
     $DB->query("

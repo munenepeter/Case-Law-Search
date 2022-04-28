@@ -6,22 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Laws Search</title>
+    <link rel="shortcut icon" href="src/static/favicon.svg" type="image/svg">
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 </head>
 
 <body class="bg-gray-100 px-3 font-sans leading-normal tracking-normal">
-    <div class=" mt-4  max-w-screen-md max-h-screen mx-auto p-4 text-center">
-        <h2 class="font-bold text-xl">Search a Case</h2>
-    </div>
-    <br>
+    <div class="mt-2 max-w-screen-md max-h-screen mx-auto p-4 text-center">
+        <h2 class="font-bold text-xl">Case Search</h2>
+    </div> 
     <main x-data="{ 'isDialogOpen': false }" @keydown.escape="isDialogOpen = false">
-        <div class="flex">
+        <div class="flex justify-between">
             <a class="ml-2 text-blue-600 hover:underline hover:text-blue-700" href="index.php">All Cases</a>
-            <a class="ml-2 text-blue-600 hover:underline hover:text-blue-700" @click.prevent="isDialogOpen = true" href="upload.php">Upload a case</a>
-            <div id="flash"></div>
+            <button class="text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" @click.prevent="isDialogOpen = true" href="upload.php">Upload a case</button>
+         
         </div>
-        <section id="modal" class="flex flex-wrap p-4">
+        <section id="modal" class="flex flex-wrap p-2">
             <!-- overlay -->
             <div class="overflow-auto" style="background-color: rgba(0,0,0,0.5)" x-show="isDialogOpen" :class="{ 'absolute inset-0 z-10 flex items-start justify-center': isDialogOpen }">
                 <!-- dialog -->
@@ -58,7 +58,7 @@
                                 <div class="mt-2">
                                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" for="user_avatar">Upload file</label>
                                     <input id="case_doc" name="case_doc" class="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer" type="file" required="">
-                                    <!-- <div class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="user_avatar_help">A profile picture is useful to confirm your are logged into your account</div> -->
+                                    <div class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="user_avatar_help">Please only upload docs or docx </div>
                                 </div>
 
                                 <!-- https://codepen.io/smashingmag/pen/vYOJaMb?editors=1000 -->
@@ -66,7 +66,7 @@
                                     <input type="submit" id="metadata-btn" name="btn" class="bg-blue-500 text-white text-sm font-medium px-6 py-2 rounded capitalize cursor-pointer" value="Upload Case">
                                 </div>
                             </form>
-                            
+                            <div class="mt-1 text-sm text-center text-red-500 dark:text-gray-300" id="flash"> </div>
                         </div>
                     </div>
                 </div><!-- /dialog -->
@@ -75,7 +75,7 @@
         </section>
     </main>
 
-    <div class="h-full bg-gray-200 text-gray-800 p-4 lg:p-8" x-data="alpineInstance()" x-init="getData()">
+    <div class="h-full bg-gray-200 text-gray-800 p-2 lg:p-4" x-data="alpineInstance()" x-init="getData()">
         <div class="flex flex-col max-w-screen-md max-h-screen mx-auto p-4">
      
             <div class="relative">
@@ -87,19 +87,21 @@
                     </svg>
                 </button>
             </div>
-            <template x-if="searchResults > 0" >
-                <p x-text="'Found ' + searchResults + ' results'"></p>
-            </template>
+           
         </div>
         <div class="container w-100 lg:w-4/5 mx-auto flex flex-col">
             <div x-init="await searchCase()" class="">
+            <template x-if="searchResults.length > 0" >
+                <p x-text="'Found ' + searchResults + ' results'"></p>
+            </template>
+          
            <template x-if="search.length > 0"   x-for="searchedLaw in searchedLaws" :key="searchedLaw.case_id">
                 <div class="flex flex-col overflow-hidden   bg-white rounded-lg shadow-xl  mt-4 w-100 mx-2">
 
                     <div class="w-full py-4 px-6 text-gray-800 flex flex-col justify-between">
                         <div class="flex justify-between">
-                            <h3 class="font-semibold text-lg leading-tight truncate" x-html="searchedLaw.case_no"> </h3>
-                            <span><b>Delivery Date :</b> <span x-html="searchedLaw.date_of_delivery"></span></span>
+                            <h3 class="font-semibold text-blue-600 text-lg leading-tight truncate" x-html="searchedLaw.case_no"> </h3>
+                            <span class="text-sm"><b>Delivery Date :</b> <span x-html="searchedLaw.date_of_delivery"></span></span>
                         </div>
                         <p class="mt-2 italic" x-html="searchedLaw.case_parties"></p>
                         <div class="flex justify-between">
@@ -113,17 +115,16 @@
                 </div>
             </template>
             </div>
-            <template  x-for="law in laws" :key="law.case_id">
+            <template x-if="search == ''"  x-for="law in laws" :key="law.case_id">
                 <div class="flex flex-col overflow-hidden   bg-white rounded-lg shadow-xl  mt-4 w-100 mx-2">
                     <div class="w-full py-4 px-6 text-gray-800 flex flex-col justify-between">
                         <div class="flex justify-between">
-                            <h3 class="font-semibold text-lg leading-tight truncate" x-text="law.case_no"> </h3>
-                            <span><b>Delivery Date :</b> <span x-text="law.date_of_delivery"></span></span>
+                            <h3 class="font-semibold text-blue-600 text-lg leading-tight truncate" x-text="law.case_no"> </h3>
+                            <span class="text-sm " ><b>Delivery Date :</b> <span x-text="law.date_of_delivery"></span></span>
                         </div>
-                        <p class="mt-2 italic" x-text="law.case_parties"></p>
+                        <p class="mt-2 italic" x-html="law.case_parties"></p>
                         <div class="flex justify-between">
-                            <p class="text-sm text-gray-700 uppercase tracking-wide font-semibold mt-2" x-text="law.court"></p>
-
+                            <p class="text-sm text-gray-700 uppercase tracking-wide font-semibold mt-2" x-html="law.court"></p>
                             <a class="ml-2 text-blue-600 hover:underline hover:text-blue-700" x-bind:href="'viewCase.php?case_id=' + law.case_id" href="">Read More</a>
                         </div>
                     </div> 
@@ -132,7 +133,7 @@
         </div>
     </div>
     </div>
-    <script src="src/js/index.js"></script>
+    <script src="src/static/index.js"></script>
 </body>
 
 </html>

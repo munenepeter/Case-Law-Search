@@ -27,7 +27,7 @@ function validate($value) {
 }
 // Highlight words in text
 function highlightWords($text, $word){
-    $text = preg_replace('#'. preg_quote($word) .'#i', '<span class="font-bold text-yellow-500">\\0</span>', $text);
+    $text = preg_replace('#'. preg_quote($word) .'#i', '<span class="font-bold text-red-500">\\0</span>', $text);
     return $text;
 }
 

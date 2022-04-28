@@ -10,6 +10,8 @@ CREATE table `cases`(
 )
 
 --@block
-
+ DELETE FROM cases
+WHERE case_id = 7;
+  
 
 DROP TABLE `cases`;

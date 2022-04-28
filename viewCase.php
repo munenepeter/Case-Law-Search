@@ -30,6 +30,7 @@ if (isset($_GET['case_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Laws | <?= $case[0]['case_no']; ?> </title>
+    <link rel="shortcut icon" href="src/static/favicon.svg" type="image/svg">
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tailwindcss/typography@0.4.1/dist/typography.css">
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
@@ -49,17 +50,32 @@ if (isset($_GET['case_id'])) {
             <div class="w-full py-4 px-6 text-gray-800 flex flex-col justify-between">
                 <div class="flex justify-between">
                     <h3 class="font-semibold text-lg leading-tight truncate"><?= $case[0]['case_no']; ?> </h3>
-                    <span><b>Delivery Date:</b> <span><?= $case[0]['date_of_delivery']; ?></span></span>
+                    <span><b>Updated:</b> <span><?= time_ago($case[0]['updated_at']); ?></span></span> 
                 </div>
                 <p class="mt-2 italic"><?= $case[0]['case_parties']; ?></p>
                 <div class="mt-2 border border-t p-2 ">
                     <article class="prose">
-                    <?= DocumentParser::parseFromFile($docsFolder.$case[0]['case_doc']); ?>
+                        <?php
+                        if(!file_exists($docsFolder.$case[0]['case_doc'])){
+                            echo "<span class=\"text-red-500\">File does not exist for some reason!</span>";  
+                  
+                        }else{
+                            try{
+                                echo DocumentParser::parseFromFile($docsFolder.$case[0]['case_doc']);
+                            }catch(\Exception $e){
+                                echo $e->getMessage();
+                            }
+                            
+                        }
+                        
+                        ?>
+                  
                     </article>
                     </div>
                 <div class="flex justify-between">
                     <p class="text-sm text-gray-700 uppercase tracking-wide font-semibold mt-2"><?= $case[0]['court']; ?></p>
-                    <span><b>Updated:</b> <span><?= time_ago($case[0]['updated_at']); ?></span></span>
+                    <span><b>Delivery Date:</b> <span><?= $case[0]['date_of_delivery']; ?></span></span>
+                    
                 </div>
             </div>
         </div>
