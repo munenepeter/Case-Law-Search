@@ -29,8 +29,9 @@ if (isset($_GET['case_id'])) {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Laws Search</title>
+    <title>Laws | <?= $case[0]['case_no']; ?> </title>
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tailwindcss/typography@0.4.1/dist/typography.css">
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 </head>
 
@@ -51,7 +52,11 @@ if (isset($_GET['case_id'])) {
                     <span><b>Delivery Date:</b> <span><?= $case[0]['date_of_delivery']; ?></span></span>
                 </div>
                 <p class="mt-2 italic"><?= $case[0]['case_parties']; ?></p>
-                <div class="mt-2 border border-t p-2 "><?= DocumentParser::parseFromFile($docsFolder.$case[0]['case_doc']); ?></div>
+                <div class="mt-2 border border-t p-2 ">
+                    <article class="prose">
+                    <?= DocumentParser::parseFromFile($docsFolder.$case[0]['case_doc']); ?>
+                    </article>
+                    </div>
                 <div class="flex justify-between">
                     <p class="text-sm text-gray-700 uppercase tracking-wide font-semibold mt-2"><?= $case[0]['court']; ?></p>
                     <span><b>Updated:</b> <span><?= time_ago($case[0]['updated_at']); ?></span></span>

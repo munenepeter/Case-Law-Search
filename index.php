@@ -77,8 +77,9 @@
 
     <div class="h-full bg-gray-200 text-gray-800 p-4 lg:p-8" x-data="alpineInstance()" x-init="getData()">
         <div class="flex flex-col max-w-screen-md max-h-screen mx-auto p-4">
+     
             <div class="relative">
-                <input x-model="search" class="w-full rounded-lg px-2 py-2 border focus:border-blue-300 ring-blue-300 focus:ring focus:outline-none" type="text" placeholder="Search..." />
+                <input @keyup="searchCase()" x-model="search" class="w-full rounded-lg px-2 py-2 border focus:border-blue-300 ring-blue-300 focus:ring focus:outline-none" type="text" placeholder="Search..." />
                 <button x-show="search.length > 0" @click="search = ''" class="absolute right-0 top-0 w-6 h-full flex justify-center items-center focus:outline-none text-gray-700 focus:text-gray-900">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
@@ -86,11 +87,34 @@
                     </svg>
                 </button>
             </div>
+            <template x-if="searchResults > 0" >
+                <p x-text="'Found ' + searchResults + ' results'"></p>
+            </template>
         </div>
         <div class="container w-100 lg:w-4/5 mx-auto flex flex-col">
-            <template x-for="law in laws" :key="law.case_id">
+            <div x-init="await searchCase()" class="">
+           <template x-if="search.length > 0"   x-for="searchedLaw in searchedLaws" :key="searchedLaw.case_id">
                 <div class="flex flex-col overflow-hidden   bg-white rounded-lg shadow-xl  mt-4 w-100 mx-2">
 
+                    <div class="w-full py-4 px-6 text-gray-800 flex flex-col justify-between">
+                        <div class="flex justify-between">
+                            <h3 class="font-semibold text-lg leading-tight truncate" x-html="searchedLaw.case_no"> </h3>
+                            <span><b>Delivery Date :</b> <span x-html="searchedLaw.date_of_delivery"></span></span>
+                        </div>
+                        <p class="mt-2 italic" x-html="searchedLaw.case_parties"></p>
+                        <div class="flex justify-between">
+                            <p class="text-sm text-gray-700 uppercase tracking-wide font-semibold mt-2" x-html="searchedLaw.court"></p>
+
+                            <a class="ml-2 text-blue-600 hover:underline hover:text-blue-700" x-bind:href="'viewCase.php?case_id=' + searchedLaw.case_id" href="">Read More</a>
+                        </div>
+                    </div>
+
+
+                </div>
+            </template>
+            </div>
+            <template  x-for="law in laws" :key="law.case_id">
+                <div class="flex flex-col overflow-hidden   bg-white rounded-lg shadow-xl  mt-4 w-100 mx-2">
                     <div class="w-full py-4 px-6 text-gray-800 flex flex-col justify-between">
                         <div class="flex justify-between">
                             <h3 class="font-semibold text-lg leading-tight truncate" x-text="law.case_no"> </h3>
@@ -102,9 +126,7 @@
 
                             <a class="ml-2 text-blue-600 hover:underline hover:text-blue-700" x-bind:href="'viewCase.php?case_id=' + law.case_id" href="">Read More</a>
                         </div>
-                    </div>
-
-
+                    </div> 
                 </div>
             </template>
         </div>
