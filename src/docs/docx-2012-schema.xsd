@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
+           targetNamespace="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+           
+  <!-- Define the w:document element -->
+  <xs:element name="document">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="body" type="w:CT_Body" minOccurs="1" maxOccurs="1"/>
+      </xs:sequence>
+      <xs:attribute name="conformance" type="xs:token" use="optional"/>
+      <xs:anyAttribute namespace="##other" processContents="lax"/>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- Define the w:body element -->
+  <xs:complexType name="CT_Body">
+    <xs:sequence>
+      <xs:element name="p" type="w:CT_P" minOccurs="1" maxOccurs="unbounded"/>
+      <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:anyAttribute namespace="##other" processContents="lax"/>
+  </xs:complexType>
+
+  <!-- Define the w:p element -->
+  <xs:complexType name="CT_P">
+    <xs:sequence>
+      <xs:element name="r" type="w:CT_R" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="rsidR" type="xs:integer" use="optional"/>
+    <xs:attribute name="rsidRDefault" type="xs:integer" use="optional"/>
+    <xs:attribute name="rsidP" type="xs:integer" use="optional"/>
+    <xs:attribute name="rsidParent" type="xs:integer" use="optional"/>
+    <xs:anyAttribute namespace="##other" processContents="lax"/>
+  </xs:complexType>
+
+  <!-- Define the w:r element -->
+  <xs:complexType name="CT_R">
+    <xs:sequence>
+      <xs:element name="t" type="w:ST_Text" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+    <xs:attribute name="rsidR" type="xs:integer" use="optional"/>
+    <xs:attribute name="rsidRPr" type="xs:integer" use="optional"/>
+    <xs:anyAttribute namespace="##other" processContents="lax"/>
+  </xs:complexType>
+
+  <!-- Define the w:t element -->
+  <xs:simpleType name="ST_Text">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="0"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>

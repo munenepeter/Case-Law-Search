@@ -6,7 +6,7 @@ function alpineInstance() {
         searchResults: 0,
         noresults: '',
         getData() {
-            fetch('http://localhost:3000/src/api/getAll.php')
+            fetch('src/api/getAll.php')
                 .then(response => response.json())
                 .then((data) => {
                     //console.log(data);
@@ -14,7 +14,7 @@ function alpineInstance() {
                 })
         },
         searchCase() {
-            fetch('http://localhost:3000/src/api/search.php?search=' + this.search, {
+            fetch('src/api/search.php?search=' + this.search, {
                     method: 'POST',
                     body: this.search,
                 })
