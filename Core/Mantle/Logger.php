@@ -9,7 +9,7 @@ class Logger {
 
     protected static $logBuffer = [];
     protected static $cachedUserInfo = null;
-    public static $logFile = __DIR__ . "/Logs/logs.log";
+    public static $logFile = APP_ROOT . "/static/logs/logs.log";
 
     public static function log(string $level, string $msg) {
         $userinfo = self::getUserInfo();

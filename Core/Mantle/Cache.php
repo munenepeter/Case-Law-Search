@@ -44,7 +44,7 @@ class Cache {
     }
 
     protected static function getFilePath($key) {
-        $cacheDirectory = __DIR__ . '/Cache/';
+        $cacheDirectory = APP_ROOT . '/static/cache/';
         if (!is_dir($cacheDirectory)) {
             mkdir($cacheDirectory, 0777, true);
         }
