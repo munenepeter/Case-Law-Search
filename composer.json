@@ -1,5 +1,12 @@
 {
     "require": {
-        "lukemadhanga/php-document-parser": "^0.1.5"
+        "lukemadhanga/php-document-parser": "^0.1.5",
+        "illuminate/database": "^11.3"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "CaseLaw\\": "./"
+        }
     }
 }
