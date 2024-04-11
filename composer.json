@@ -1,7 +1,8 @@
 {
     "require": {
         "lukemadhanga/php-document-parser": "^0.1.5",
-        "illuminate/database": "^11.3"
+        "illuminate/database": "^11.3",
+        "guzzlehttp/guzzle": "^7.8"
     },
     "license": "MIT",
     "autoload": {
