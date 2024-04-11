@@ -1,10 +1,14 @@
 <?php
 
+use CaseLaw\Controllers\MigrationController;
 use CaseLaw\Core\Mantle\Router;
 use CaseLaw\Controllers\PagesController;
 use CaseLaw\Controllers\SystemController;
 
 Router::get('', [PagesController::class, 'index']);
+
+
+Router::get('migrations', [MigrationController::class, 'index']);
 
 
 //logs

@@ -26,11 +26,6 @@ App::bind('config', Config::load());
 session_start();
 
 
-
-// Bind the Database credentials and connect to the app
-App::bind('mailer', new Mail(App::get('config.mail')));
-
-
 $capsule = new Capsule;
 
 Connection::make(App::get('config.db'), $capsule);
