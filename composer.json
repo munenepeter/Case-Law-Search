@@ -1,13 +1,22 @@
 {
-    "require": {
-        "lukemadhanga/php-document-parser": "^0.1.5",
-        "illuminate/database": "^11.3",
-        "guzzlehttp/guzzle": "^7.8"
-    },
+    "name": "tabel/tabel",
+    "description": "A simple simple custom framework",
+    "type": "library",
     "license": "MIT",
+    "authors": [
+        {
+          "name": "munenepeter",
+            "email": "munenenjega@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+         "tabel/framework": "dev-main"
+    },
     "autoload": {
         "psr-4": {
-            "CaseLaw\\": "./"
+            "App\\": "app/",
+            "Database\\": "database/"
         }
     }
 }

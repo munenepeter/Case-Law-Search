@@ -1,4 +1,5 @@
-/vendor
+.env
 -1
-/node_modules
-/static/docs/
+composer.phar
+/vendor/
+/node-modules/

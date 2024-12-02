@@ -1,62 +1,31 @@
-<?php include_once 'base.view.php';?>
+<?php include_once 'base.view.php'; ?>
 
-<section>
+<div class="max-w-4xl mx-auto">
+    <div class="py-12 text-center">
+        <h1 class="mb-4 text-4xl font-bold text-primary-dark">Welcome to Tabel</h1>
+        <p class="mb-8 text-lg text-primary-medium">A lightweight, elegant PHP framework for modern web applications</p>
+        
+        <div class="flex justify-center space-x-4">
+            <a href="/docs" class="px-6 py-3 text-white transition rounded-lg bg-primary-dark hover:bg-primary-medium">
+                Get Started
+            </a>
+            <a href="https://github.com/munenepeter/framework" class="px-6 py-3 transition border rounded-lg border-primary-dark text-primary-dark hover:bg-primary-lighter">
+                View on GitHub
+            </a>
+        </div>
+    </div>
 
-Welcome to law search
+    <div class="grid grid-cols-1 gap-8 mt-12 md:grid-cols-2">
+        <div class="p-6 border rounded-lg border-primary-lighter">
+            <h2 class="mb-3 text-xl font-semibold text-primary-dark">Simple & Intuitive</h2>
+            <p class="text-gray-600">Built with developer experience in mind, offering a clean and straightforward approach to web development.</p>
+        </div>
 
-<br>
+        <div class="p-6 border rounded-lg border-primary-lighter">
+            <h2 class="mb-3 text-xl font-semibold text-primary-dark">Modern Architecture</h2>
+            <p class="text-gray-600">Leveraging PHP 8+ features with a robust MVC structure for building scalable applications.</p>
+        </div>
+    </div>
+</div>
 
-<input type="search" name="q" id="query">
-
-<br>
-
-<button type="submit">Search</button>
-</section>
-
-
-
-<?php
-
-$path = APP_ROOT . 'static/docs/acts.html';
-
-function parseActsFromHtml(string $html): array {
-
-    $acts = [];
-
-    // Use DOMDocument for parsing the HTML
-    $dom = new DOMDocument();
-    $dom->loadHTML($html);
-
-    // Find all elements with class "act-title"
-    $actTitles = $dom->getElementsByTagName('div');
-    foreach ($actTitles as $actTitle) {
-        if ($actTitle->getAttribute('class') === 'act-title') {
-            // Find the anchor tag (a) within the act-title div
-            $anchor = $actTitle->getElementsByTagName('a')->item(0);
-            if ($anchor) {
-                $acts[] = [
-                    'title' => trim(strip_tags($actTitle->textContent)), // Extract title text
-                    'href' => "http://kenyalaw.org:8181/exist/kenyalex/".$anchor->getAttribute('href'), // Extract link (href)
-                ];
-            }
-        }
-    }
-
-    return $acts;
-}
-
-// Example usage
-$html = file_get_contents($path);
-
-$acts = parseActsFromHtml($html);
-
-if (!empty($acts)) {
-    foreach ($acts as $act) {
-        echo trim($act['title']) . ", Link: " . $act['href'] . "<br/> <br/>";
-    }
-} else {
-    echo "No acts found in the provided HTML.";
-}
-
-// http://kenyalaw.org:8181/exist/kenyalex/index.xql
-// actview.xql?actid=CAP.%20361
+<?php include_once 'sections/footer.view.php' ?>
