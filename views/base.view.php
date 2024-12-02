@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Tabel</title>
+    <title>Case Law Search</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
     <script>
@@ -23,8 +23,8 @@
             }
         }
     </script>
-    <link rel="icon" href="<?php asset("imgs/favicon/norm-favicon.svg") ?>" type="image/svg">
     <script defer src="<?php asset("js/index.js") ?>"></script>
+    <script defer src="<?php asset("js/instant-page.js") ?>"></script>
 
 </head>
 <body class="flex flex-col min-h-screen bg-white">
@@ -42,7 +42,7 @@
                     <a href="/gazettes" class="transition text-primary hover:text-primary-medium">Gazettes</a>
                     <a href="/parliament" class="transition text-primary hover:text-primary-medium">Parliamentary Business</a>
                     <a href="/docs" class="transition text-primary hover:text-primary-medium">Documentation</a>
-                    <a href="https://github.com/munenepeter/Tabel" class="transition text-primary hover:text-primary-medium">GitHub</a>
+                    <a href="https://github.com/munenepeter/Case-Law-Search" class="transition text-primary hover:text-primary-medium">GitHub</a>
                 </div>
             </div>
             
