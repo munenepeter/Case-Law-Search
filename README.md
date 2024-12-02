@@ -23,29 +23,29 @@ This project is experimental, and features will continue to be added and refined
 
 **Install Required Software**
 
-> [!NOTE]
-> Windows users, it's recommended to use **Laragon** as it simplifies the installation process. You can download it from [Laragon](https://laragon.org/download/).
-
-> _for linux users, since you already know how to figure things out, please install a mysql version 8+, php version 8.3+ and composer latest version_
-
 - **PHP**: Ensure you have PHP installed. Laragon comes with PHP pre-installed.
-
-> [!NOTE]     
-> _Laragon comes pre-installed with php v8.1 (as of the date of this writing) but for our project we want 8.3 visit [here](https://windows.php.net/downloads/releases/archives/php-8.3.9-nts-Win32-vs16-x64.zip) to download 8.3 (x64 bit systems) and the unzip it to `C:\path\to\laragon\install\location\bin\php` then change php version in php GUI interface (right click) that's it_
-
 - **Composer**: If using Laragon, Composer is included.
 - **MySQL**: If using Laragon, Composer is included.
+- **SQLite**: Just have to enable it in php.ini file `extension=pdo_sqlite` and `extension=sqlite3`
+
+> [!NOTE]
+> Windows users, it's recommended to use **Laragon** as it simplifies the installation process. You can download it from [here](https://laragon.org/download/). 
+> _Laragon comes pre-installed with php v8.1 (as of the date of this writing) but for this project we want 8.3 visit [here](https://windows.php.net/downloads/releases/archives/php-8.3.9-nts-Win32-vs16-x64.zip) to download 8.3 (x64 bit systems) and the unzip it to `C:\path\to\laragon\install\location\bin\php` then change php version in php GUI interface (right click) that's it_
+
+
+> _for linux users, since you already know how to figure things out, please install a mysql version 8+, (or sqlite) php version 8.3+ and composer latest version_
+
 
 **Set Up Project Locally**
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/munenepeter/case-law-search.git
+   git clone https://github.com/munenepeter/Case-Law-Search.git
    ```
 
 2. Navigate to the project directory:
    ```sh
-   cd kenya-case-law-search
+   cd Case-Law-Search
    ```
 
 3. Install dependencies:
@@ -57,7 +57,7 @@ This project is experimental, and features will continue to be added and refined
 
 5. Run the application:
    ```sh
-   php -S localhost:8000 -t public
+   php -S localhost:8000 -t server.php
    ```
 
 6. Open your browser and visit `http://localhost:8000` to access the application.
