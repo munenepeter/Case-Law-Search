@@ -1,6 +1,6 @@
 <?php
 
-use App\Console\Commands\ScrapeGazettes;
+use App\Console\ScrapeGazettes;
 
 return [
     'scrape:gazettes' => ScrapeGazettes::class,

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console;
 
 use Tabel\Core\Command;
 use App\Services\Scrapers\GazetteScraper;
